@@ -32,6 +32,16 @@ public class SudokuBox {
     public static int[] getSquareIntervals(int row, int column){
         int[] intervals = new int[4];
         
+        /* 
+        int maxMultiple = 3;
+        while(row < maxMultiple){
+            maxMultiple += 3;
+        }
+        maxMultiple -= 3;
+        intervals[0] = maxMultiple - 4;
+        intervals[1] = maxMultiple;
+        */
+
         if(row < 3){
             intervals[0] = 0;
             intervals[1] = 3; 
@@ -62,7 +72,7 @@ public class SudokuBox {
             possibleValues.add(i);
         }
 
-        for(int i = 0; i < 9; i++){
+        for(int i = 0; i < SudokuSolver.BOARD_DIMENSION; i++){
             if(board[row][i] != 0)
                 possibleValues.remove(board[row][i]);
 
@@ -81,10 +91,10 @@ public class SudokuBox {
 
     public int[] getPossibleValues(){
         int[] values = new int[possibleValues.size()];
-        int count = 0;
+        int index = 0;
         for(int i : possibleValues){
-            values[count] = i;
-            count++;
+            values[index] = i;
+            index++;
         }
         return values;
     }

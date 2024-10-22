@@ -1,4 +1,4 @@
-import java.util.HashMap;
+import java.util.HashSet;
 
 class SudokuSolver{
     static final int BOARD_DIMENSION = 9;
@@ -56,10 +56,9 @@ class SudokuSolver{
         }
         return bestBox;
     }
- 
+    
     private static boolean updatePossibleValue(SudokuBox[][] board, int row, int column, int val){
         for(int i = 0; i < BOARD_DIMENSION; i++){
-
 
             SudokuBox rowBox = board[row][i];            
             SudokuBox columnBox = board[i][column];
@@ -85,19 +84,60 @@ class SudokuSolver{
         return true;
     }
 
-    private static boolean isFinishedBoard(SudokuBox[][] board){
-        HashMap<Integer, Integer> numCounts = new HashMap<>();
+    private static boolean verifyRowsAndColumns(SudokuBox[][] board){
         for(int i = 0; i < BOARD_DIMENSION; i++){
+            HashSet<Integer> rowCount = new HashSet<>();
+            HashSet<Integer> columnCount = new HashSet<>();
+
             for(int j = 0; j < BOARD_DIMENSION; j++){
-                int val = board[i][j].getPossibleValues()[0];
-                numCounts.put(val, numCounts.getOrDefault(val, 0) + 1);
+                int[] rowPossibleValues = board[i][j].getPossibleValues();
+                int[] columnPossibleValues = board[j][i].getPossibleValues();
+                if(rowPossibleValues.length > 1 | columnPossibleValues.length > 1)
+                    return false;
+
+                int rowVal = rowPossibleValues[0];
+                int columnVal = columnPossibleValues[0];
+                if(rowCount.contains(rowVal) || columnCount.contains(columnVal))
+                    return false;
+
+                rowCount.add(rowVal);
+                columnCount.add(columnVal);
             }
         }
+        return true;
+    }
 
-        for(int i = 1; i < 10; i++){
-            if(numCounts.get(i) != 9)
-                return false;
+    private static boolean verifySquares(SudokuBox[][] board){
+        for(int row = 0; row < 12; row += 3){
+            for(int column = 0; column < 12; column += 3){
+                int[] intervals = SudokuBox.getSquareIntervals(row, column); 
+                int rowStart = intervals[0];
+                int rowEnd = intervals[1];
+                int columnStart = intervals[2];
+                int columnEnd = intervals[3];
+
+                for(int i = rowStart; i < rowEnd; i++){
+                    HashSet<Integer> squareCount = new HashSet<>();
+                    for(int j = columnStart; j < columnEnd; j++){
+                        int[] possibleValues = board[i][j].getPossibleValues();
+                        if(possibleValues.length > 1)
+                            return false;
+
+                        int val = possibleValues[0];
+                        if(squareCount.contains(val))
+                            return false;
+
+                        squareCount.add(val);
+                    }
+                }
+            }
         }
+        return true;
+    }
+
+    private static boolean isFinishedBoard(SudokuBox[][] board){
+        if(!verifyRowsAndColumns(board) || !verifySquares(board))
+            return false;
 
         return true;
     }
@@ -159,15 +199,15 @@ class SudokuSolver{
     public static void main(String args[]){
         //int[][] initialBoard = new int[BOARD_DIMENSION][BOARD_DIMENSION];
         int[][] initialBoard = {
-            {4, 1, 0, 0, 6, 0, 0, 7, 8}, 
-            {7, 0, 3, 5, 0, 1, 4, 2, 0}, 
-            {0, 0, 8, 4, 7, 3, 0, 6, 0}, 
-            {0, 5, 0, 0, 9, 4, 8, 3, 0}, 
-            {3, 9, 0, 0, 1, 0, 7, 0, 0}, 
-            {2, 8, 4, 3, 0, 0, 0, 0, 0}, 
-            {6, 0, 0, 0, 0, 0, 0, 8, 0}, 
-            {0, 0, 1, 9, 4, 0, 0, 0, 0},
-            {0, 4, 9, 0, 2, 8, 0, 0, 0}
+            {0, 2, 1, 0, 9, 0, 0, 7, 0}, 
+            {0, 0, 9, 0, 0, 0, 0, 0, 0}, 
+            {8, 0, 6, 2, 0, 0, 0, 0, 0}, 
+            {0, 4, 0, 0, 8, 7, 0, 0, 0}, 
+            {0, 0, 0, 0, 0, 0, 1, 0, 0}, 
+            {9, 0, 0, 0, 4, 6, 0, 3, 0}, 
+            {0, 0, 0, 7, 0, 0, 2, 8, 0}, 
+            {0, 0, 8, 0, 0, 0, 0, 6, 9},
+            {0, 0, 0, 8, 1, 0, 5, 0, 0}
         };
         
         if(!verifyInitialBoard(initialBoard)){
@@ -178,5 +218,6 @@ class SudokuSolver{
         SudokuBox[][] sudokuBoard = initializeSudokuBoard(initialBoard);
         SudokuBox box = getBestBox(sudokuBoard);
         solve(sudokuBoard, box);
+        System.out.println("Unsolvable");
     }
 }
