@@ -1,5 +1,5 @@
-package demo.src.main.java.com.example.service;
-import demo.src.main.java.com.example.model.SudokuBox;
+package com.example.service;
+import com.example.model.SudokuBox;
 import java.util.HashSet;
 
 public class SudokuSolver{
@@ -176,7 +176,9 @@ public class SudokuSolver{
                 }
                 
                 if (isFinishedBoard(copyBoard)) {
-                    displayFinishedBoard(copyBoard);
+                    displayFinishedBoard(copyBoard);    // For testing
+                    getBoardString(copyBoard);
+                    // SEND FINISHED BOARD STRING
                     System.exit(0);
                 }
 
@@ -212,23 +214,38 @@ public class SudokuSolver{
         return board;
     }   
 
+    private static String getBoardString(SudokuBox[][] board){
+        String finishedBoard = "";
+
+        for(int i = 0; i < BOARD_DIMENSION; i++){
+            for(int j = 0; j < BOARD_DIMENSION; j++){
+                SudokuBox box = board[i][j];
+                int[] val = box.getPossibleValues();
+                finishedBoard += val[0];
+            }
+        }
+
+        return finishedBoard;
+    }
+
     public static void main(String args[]){
         char[] inputArray = args[0].toCharArray();
 
         if(inputArray.length != 81){
+            // SEND UNSOLVABLE INDICATOR
             return;
         }
 
         int[][] initialBoard = getInitialBoard(inputArray);
 
         if(!verifyInitialBoard(initialBoard)){
-            System.out.println("Invalid Input");
+            // SEND UNSOLVABLE INDICATOR
             return;
         }
         
         SudokuBox[][] sudokuBoard = initializeSudokuBoard(initialBoard);
         SudokuBox box = getBestBox(sudokuBoard);
         solve(sudokuBoard, box);
-        System.out.println("Unsolvable");
+        // SEND UNSOLVABLE INDICATOR
     }
 }
