@@ -1,6 +1,8 @@
+package demo.src.main.java.com.example.service;
+import demo.src.main.java.com.example.model.SudokuBox;
 import java.util.HashSet;
 
-class SudokuSolver{
+public class SudokuSolver{
     static final int BOARD_DIMENSION = 9;
 
     private static boolean verifyInitialBoard(int[][] board){
@@ -92,7 +94,7 @@ class SudokuSolver{
             for(int j = 0; j < BOARD_DIMENSION; j++){
                 int[] rowPossibleValues = board[i][j].getPossibleValues();
                 int[] columnPossibleValues = board[j][i].getPossibleValues();
-                if(rowPossibleValues.length > 1 | columnPossibleValues.length > 1)
+                if(rowPossibleValues.length > 1 || columnPossibleValues.length > 1)
                     return false;
 
                 int rowVal = rowPossibleValues[0];
@@ -196,20 +198,29 @@ class SudokuSolver{
         }
     }
 
-    public static void main(String args[]){
-        //int[][] initialBoard = new int[BOARD_DIMENSION][BOARD_DIMENSION];
-        int[][] initialBoard = {
-            {0, 2, 1, 0, 9, 0, 0, 7, 0}, 
-            {0, 0, 9, 0, 0, 0, 0, 0, 0}, 
-            {8, 0, 6, 2, 0, 0, 0, 0, 0}, 
-            {0, 4, 0, 0, 8, 7, 0, 0, 0}, 
-            {0, 0, 0, 0, 0, 0, 1, 0, 0}, 
-            {9, 0, 0, 0, 4, 6, 0, 3, 0}, 
-            {0, 0, 0, 7, 0, 0, 2, 8, 0}, 
-            {0, 0, 8, 0, 0, 0, 0, 6, 9},
-            {0, 0, 0, 8, 1, 0, 5, 0, 0}
-        };
+    private static int[][] getInitialBoard(char[] inputArray){
+        int[][] board = new int[BOARD_DIMENSION][BOARD_DIMENSION];
         
+        int index = 0;
+        for(int i = 0; i < BOARD_DIMENSION; i++){
+            for(int j = 0; j < BOARD_DIMENSION; j++){
+                board[i][j] = Integer.valueOf(inputArray[index]);
+                index++;
+            }
+        }
+
+        return board;
+    }   
+
+    public static void main(String args[]){
+        char[] inputArray = args[0].toCharArray();
+
+        if(inputArray.length != 81){
+            return;
+        }
+
+        int[][] initialBoard = getInitialBoard(inputArray);
+
         if(!verifyInitialBoard(initialBoard)){
             System.out.println("Invalid Input");
             return;
