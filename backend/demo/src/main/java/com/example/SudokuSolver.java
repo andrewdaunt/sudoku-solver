@@ -1,5 +1,4 @@
-package com.example.service;
-import com.example.model.SudokuBox;
+package com.example;
 import java.util.HashSet;
 
 public class SudokuSolver{
@@ -7,12 +6,13 @@ public class SudokuSolver{
 
     private static boolean verifyInitialBoard(int[][] board){
         int minValue = 0;
-        int maxValue = 10;
+        int maxValue = 9;
 
         for(int i = 0; i < BOARD_DIMENSION; i++){
             for(int j = 0; j < BOARD_DIMENSION; j++){
-                if(board[i][j] < minValue || board[i][j] > maxValue)
+                if(board[i][j] < minValue || board[i][j] > maxValue){
                     return false;
+                }
             }
         }
 
@@ -110,17 +110,11 @@ public class SudokuSolver{
     }
 
     private static boolean verifySquares(SudokuBox[][] board){
-        for(int row = 0; row < 12; row += 3){
-            for(int column = 0; column < 12; column += 3){
-                int[] intervals = SudokuBox.getSquareIntervals(row, column); 
-                int rowStart = intervals[0];
-                int rowEnd = intervals[1];
-                int columnStart = intervals[2];
-                int columnEnd = intervals[3];
-
-                for(int i = rowStart; i < rowEnd; i++){
-                    HashSet<Integer> squareCount = new HashSet<>();
-                    for(int j = columnStart; j < columnEnd; j++){
+        for(int row = 0; row < 9; row += 3){
+            for(int column = 0; column < 9; column += 3){
+                HashSet<Integer> squareCount = new HashSet<>();
+                for(int i = row; i < row + 3; i++){
+                    for(int j = column; j < column + 3; j++){
                         int[] possibleValues = board[i][j].getPossibleValues();
                         if(possibleValues.length > 1)
                             return false;
@@ -138,10 +132,7 @@ public class SudokuSolver{
     }
 
     private static boolean isFinishedBoard(SudokuBox[][] board){
-        if(!verifyRowsAndColumns(board) || !verifySquares(board))
-            return false;
-
-        return true;
+        return (verifyRowsAndColumns(board) && verifySquares(board));
     }
 
     private static SudokuBox[][] copySudokuBoard(SudokuBox[][] board){
@@ -163,29 +154,30 @@ public class SudokuSolver{
         return copy;
     }
 
-    private static void solve(SudokuBox[][] board, SudokuBox box) {
-        if (box == null) return;
-    
+    private static String solve(SudokuBox[][] board, SudokuBox box) {
+        if(box == null)
+            return null;
+
         int[] values = box.getPossibleValues();
         for (int val : values) {
             SudokuBox[][] copyBoard = copySudokuBoard(board);
             if (copyBoard[box.getRow()][box.getColumn()].chooseValue(val)) {
-
                 if (!updatePossibleValue(copyBoard, box.getRow(), box.getColumn(), val)) {
                     continue;
                 }
                 
                 if (isFinishedBoard(copyBoard)) {
-                    displayFinishedBoard(copyBoard);    // For testing
-                    getBoardString(copyBoard);
-                    // SEND FINISHED BOARD STRING
-                    System.exit(0);
+                    return getBoardString(copyBoard);
                 }
 
                 SudokuBox nextBox = getBestBox(copyBoard);
-                solve(copyBoard, nextBox);
+                String result = solve(copyBoard, nextBox);
+                if (result != null) {
+                    return result;
+                }
             }
         }
+        return null;
     }
     
 
@@ -200,13 +192,13 @@ public class SudokuSolver{
         }
     }
 
-    private static int[][] getInitialBoard(char[] inputArray){
+    private static int[][] getInitialBoard(String input){
         int[][] board = new int[BOARD_DIMENSION][BOARD_DIMENSION];
         
         int index = 0;
         for(int i = 0; i < BOARD_DIMENSION; i++){
             for(int j = 0; j < BOARD_DIMENSION; j++){
-                board[i][j] = Integer.valueOf(inputArray[index]);
+                board[i][j] = Integer.valueOf((input.substring(index, index + 1)));
                 index++;
             }
         }
@@ -228,24 +220,19 @@ public class SudokuSolver{
         return finishedBoard;
     }
 
-    public static void main(String args[]){
-        char[] inputArray = args[0].toCharArray();
-
-        if(inputArray.length != 81){
-            // SEND UNSOLVABLE INDICATOR
-            return;
+    public String solvePuzzle(String stringBoard){
+        if(stringBoard.length() != 81){
+            return stringBoard;
         }
 
-        int[][] initialBoard = getInitialBoard(inputArray);
-
+        int[][] initialBoard = getInitialBoard(stringBoard);
         if(!verifyInitialBoard(initialBoard)){
-            // SEND UNSOLVABLE INDICATOR
-            return;
+            return stringBoard;
         }
         
         SudokuBox[][] sudokuBoard = initializeSudokuBoard(initialBoard);
         SudokuBox box = getBestBox(sudokuBoard);
-        solve(sudokuBoard, box);
-        // SEND UNSOLVABLE INDICATOR
+        String result = solve(sudokuBoard, box);
+        return result == null ? stringBoard : result;
     }
 }
