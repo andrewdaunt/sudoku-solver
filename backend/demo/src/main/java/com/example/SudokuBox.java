@@ -77,9 +77,10 @@ public class SudokuBox {
         for(int i = intervals[0]; i < intervals[1]; i++){
             for(int j = intervals[2]; j < intervals[3]; j++){
                 if(board[i][j] != 0)
-                possibleValues.remove(board[i][j]);
+                    possibleValues.remove(board[i][j]);
             }
         }
+        System.out.println(possibleValues.size());
     }
 
     public int[] getPossibleValues(){
