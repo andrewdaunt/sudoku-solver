@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SudokuController {
     private final SudokuSolver solver = new SudokuSolver();
 
-    @CrossOrigin(origins = "http://localhost:3000")     // Allow requests from all origins
+    @CrossOrigin(origins = "http://localhost:3000")
 
     @PostMapping("/solve")
     public String solveSudoku(@RequestBody String request) {
