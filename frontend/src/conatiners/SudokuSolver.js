@@ -20,6 +20,7 @@ function SudokuSolver(){
     };
 
     function handleBoxChange(rowIndex, colIndex, value){
+        const index = rowIndex * 9 + colIndex;
         // determine index from row/col and update value
     };
 

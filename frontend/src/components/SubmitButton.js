@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from '../styles/SubmitButton';
+import styles from '../styles/SudokuSolver.module.css';
 
 function SubmitButton({ onClick }){
-    return <button style={styles} onClick={onClick}>Solve</button>
+    return <button className={styles.submitButton} onClick={onClick}>Solve</button>
 }
 
 export default SubmitButton;

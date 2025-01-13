@@ -1,10 +1,10 @@
 import React from 'react';
 import SudokuBox from './SudokuBox';
-import styles from '../styles/SudokuBoard';
+import styles from '../styles/SudokuSolver.module.css';;
 
 function SudokuBoard({ board, onBoxChange }) {
     return(
-        <div className='sudoku-board'>
+        <div className={styles.sudokuBoard}>
             
         </div>
     );
