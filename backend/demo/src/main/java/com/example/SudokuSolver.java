@@ -58,7 +58,6 @@ public class SudokuSolver{
             SudokuBox rowBox = board[row][i];            
             SudokuBox columnBox = board[i][column];
             if((i != row && !columnBox.removePossibleValue(val)) || (i != column && !rowBox.removePossibleValue(val))){
-                System.out.println("FAILED IN ROW/COL " + i);
                 return false;
             }
         }
@@ -73,7 +72,6 @@ public class SudokuSolver{
             for(int j = columnStart; j < columnEnd; j++){
                 SudokuBox box = board[i][j];
                 if(i != row && j != column && !box.removePossibleValue(val)){
-                    System.out.println("FAILED IN SQUARE: " + i + " " + j);
                     return false;
                 }    
             }
@@ -179,36 +177,31 @@ public class SudokuSolver{
 
     private static String solve(SudokuBox[][] board, SudokuBox box) {
         if(box == null){
-            System.out.println("CHOSEN BOX IS NULL");
             return null;
         }
         
         int[] values = box.getPossibleValues();
         for (int val : values) {
-            System.out.println("TRYING " + val + " IN BOX " + box.getRow() + ":" + box.getColumn());
             SudokuBox[][] copyBoard = copySudokuBoard(board);
             if(copyBoard[box.getRow()][box.getColumn()].chooseValue(val)) {
                 if (!updatePossibleValue(copyBoard, box.getRow(), box.getColumn(), val)) {
                     continue;
                 }
 
-                System.out.println("\nCHOSE VAL: " + val);
-                displayFinishedBoard(board);
                 if (isFinishedBoard(copyBoard)) {
-                    System.out.println("FINISHED");
+                    System.out.println("Solution Found");
+                    displayFinishedBoard(board);
                     return getBoardString(copyBoard);
                 }
 
                 SudokuBox nextBox = getBestBox(copyBoard);
                 String result = solve(copyBoard, nextBox);
                 if (result != null) {
-                    System.out.println("PROPOGATE RESULT");
                     return result;
                 }
-                System.out.println("NULL: TRY NEXT VAL");
             }
         }
-        System.out.println("FAILED FOR ALL VALUES");
+        System.out.println("Failed for all values");
         return null;
     }
 

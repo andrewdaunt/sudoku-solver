@@ -1,0 +1,15 @@
+.header{
+    background-color: lightblue;
+    height: 100px;
+}
+
+.main{
+    display: block;
+    background-color: rgb(235, 235, 235);
+    padding: 30px;
+}
+
+.footer{
+    background-color: lightblue;
+    height: 80px;
+}
