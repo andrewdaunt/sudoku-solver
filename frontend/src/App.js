@@ -13,9 +13,7 @@ function App(){
             <div className='main'>
                 <SudokuSolver />
             </div>
-            <div className='footer'>
-                <SudokuFooter />
-            </div>
+            <div className='footer'></div>
         </div>
     );
 };
