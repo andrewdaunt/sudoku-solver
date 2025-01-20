@@ -201,7 +201,6 @@ public class SudokuSolver{
                 }
             }
         }
-        System.out.println("Failed for all values");
         return null;
     }
 

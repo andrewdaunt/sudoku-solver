@@ -2,7 +2,6 @@ import React from 'react';
 import './styles/app.css';
 import SudokuSolver from './containers/SudokuSolver';
 import SudokuHeader from './containers/SudokuHeader';
-import SudokuFooter from './containers/SudokuFooter';
 
 function App(){
     return(

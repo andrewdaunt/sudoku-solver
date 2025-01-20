@@ -1,5 +1,5 @@
 package com.example;
-
+import java.util.HashMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,11 +15,11 @@ public class SudokuController {
     @CrossOrigin(origins = "http://localhost:3000")
 
     @PostMapping("/solve")
-    public String solveSudoku(@RequestBody String request) {
+    public HashMap<String, String> solveSudoku(@RequestBody String request) {
         String board = request.substring(10, request.length() - 2);
         System.out.println("Recieved request: " + board);
         String finishedBoard = solver.solvePuzzle(board);
         System.out.println("Returning: " + finishedBoard);
-        return finishedBoard; 
+        return SudokuResponse.getResponse(finishedBoard); 
     }
 }

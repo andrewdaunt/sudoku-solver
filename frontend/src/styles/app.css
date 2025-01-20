@@ -1,4 +1,7 @@
 .header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: lightblue;
     height: 100px;
 }
@@ -6,10 +9,11 @@
 .main{
     display: block;
     background-color: rgb(235, 235, 235);
-    padding: 30px;
+    padding-top: 30px;
+    padding-bottom: 5px;
 }
 
 .footer{
     background-color: lightblue;
-    height: 20px;
+    height: 30px;
 }
