@@ -5,10 +5,12 @@ import styles from '../styles/SudokuSolver.module.css';;
 function SudokuBoard({ board, onBoxChange }) {
     const gridSize = 9;
 
+    // Get flat index from grid
     function getIndex(rowIndex, colIndex){
         return rowIndex * gridSize  + colIndex;
     }
 
+    // returns a 9x9 grid of input boxes
     return(
         <div className={styles.sudokuBoard}>
             {Array.from({ length: gridSize }).map((_, rowIndex) => (

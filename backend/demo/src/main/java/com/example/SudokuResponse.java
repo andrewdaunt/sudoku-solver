@@ -5,9 +5,11 @@ public class SudokuResponse {
     public static HashMap<String, String> getResponse(String board){
         HashMap<String, String> response = new HashMap<>();
 
-        for(int i = 0; i < 9; i++){
-            String part = board.substring(i, i + 9);
+        int stringPos = 0;
+        for(int i = 1; i < 10; i++){
+            String part = board.substring(stringPos, stringPos + 9);
             response.put(String.valueOf(i), part);
+            stringPos += 9;
         }
 
         return response;
