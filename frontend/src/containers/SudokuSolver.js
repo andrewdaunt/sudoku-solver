@@ -11,7 +11,7 @@ function SudokuSolver(){
     }
 
     // Updates board with solved state
-    function handleClickSolve(){
+    async function handleClickSolve(){
         // Makes api call and returns solved board as a string
         async function getSolvedBoard(){
             try{
@@ -20,7 +20,7 @@ function SudokuSolver(){
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify({ board: board })
+                    body: JSON.stringify({ board: board.substring(0, 81) })
                 });
 
                 if(!response.ok){
@@ -41,7 +41,8 @@ function SudokuSolver(){
         };
 
         // If solvedBoard is valid, the board state will be updated
-        const solvedBoard = getSolvedBoard();
+        const solvedBoard = await getSolvedBoard();
+        console.log(solvedBoard.length)
         if(solvedBoard != board && solvedBoard.length == 81){
             setBoard(solvedBoard);
         } else{
