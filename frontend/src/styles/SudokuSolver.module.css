@@ -1,12 +1,28 @@
 .sudokuBoard{
     display: block;
     margin: auto;
-    width: 504px;
-    border: 1px solid black;
+    width: 510px;
+    border: 2px solid black;
 }
 
 .sudokuBoardRow{
     display: flex;
+}
+
+.sudokuBox:nth-child(3n) {
+    border-right: 2px solid black;
+}
+
+.sudokuBoardRow:nth-child(3n) .sudokuBox {
+    border-bottom: 2px solid black; 
+}
+
+.sudokuBoardRow:nth-child(3n+1) .sudokuBox {
+    border-top: 2px solid black; 
+}
+
+.sudokuBoardRow > .sudokuBox:nth-child(3n+1) {
+    border-left: 2px solid black; 
 }
 
 .sudokuBox{
@@ -47,7 +63,7 @@
     text-align: center;
     font-family: Georgia;
     font-size: 20px;
-    font-weight: normal;
+    font-weight: bold;
 }
 
 .button:hover{

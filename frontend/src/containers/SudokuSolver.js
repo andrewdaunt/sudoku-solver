@@ -37,13 +37,14 @@ function SudokuSolver(){
                 return result;
             } catch(error){
                 console.error(error.message);
+                return board;
             }
         };
 
         // If solvedBoard is valid, the board state will be updated
         const solvedBoard = await getSolvedBoard();
         console.log(solvedBoard.length)
-        if(solvedBoard != board && solvedBoard.length == 81){
+        if(solvedBoard !== board && solvedBoard.length === 81){
             setBoard(solvedBoard);
         } else{
             console.log('Invalid Board');

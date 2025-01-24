@@ -1,0 +1,10 @@
+.profileLink{
+    display: block;
+    margin: auto;
+    padding: 18px;
+    color: white;
+    text-align: center;
+    font-family: Georgia;
+    font-size: 15px;
+    font-weight: normal;
+}

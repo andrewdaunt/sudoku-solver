@@ -5,8 +5,8 @@ function SudokuBox({ rowIndex, colIndex, value, onChange }){
     function handleChange(e){
         const newValue = e.target.value;
 
-        // If newValue is blank or a digit 1-9 callback function to change value
-        if(newValue == '' || /^[1-9]$/.test(newValue)){
+        // If newValue is blank or a digit 1-9, then call function to update value
+        if(newValue === '' || /^[1-9]$/.test(newValue)){
             onChange(rowIndex, colIndex, newValue === '' ? '0' : newValue);
         }
     };
