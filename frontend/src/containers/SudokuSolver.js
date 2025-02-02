@@ -15,7 +15,8 @@ function SudokuSolver(){
         // Makes api call and returns solved board as a string
         async function getSolvedBoard(){
             try{
-                const response = await fetch('http://localhost:8080/api/solve', {
+
+                const response = await fetch(process.env.API_URL + process.env.API_PORT + '/api/solve', {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -43,7 +44,6 @@ function SudokuSolver(){
 
         // If solvedBoard is valid, the board state will be updated
         const solvedBoard = await getSolvedBoard();
-        console.log(solvedBoard.length)
         if(solvedBoard !== board && solvedBoard.length === 81){
             setBoard(solvedBoard);
         } else{

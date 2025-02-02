@@ -2,7 +2,6 @@
     display: block;
     margin: auto;
     width: 510px;
-    border: 2px solid black;
 }
 
 .sudokuBoardRow{
@@ -27,7 +26,7 @@
 
 .sudokuBox{
     border: 1px solid black;
-    background-color: white;
+    background-color: whitesmoke;
     width: 50px;
     height: 50px;
     text-overflow: ellipsis;
@@ -38,7 +37,7 @@
 }
 
 .sudokuBox:focus{
-    outline-color: lightblue;
+    outline-color: #1F305E;
 }
 
 .sudokuBox:invalid{
@@ -56,9 +55,9 @@
 .button{
     width: 140px;
     height: 60px;
-    color: white;
-    background-color: lightblue;
-    border: 4px solid lightblue;
+    color: whitesmoke;
+    background-color: #1F305E;
+    border: 4px solid #1F305E;
     border-radius: 30px;
     text-align: center;
     font-family: Georgia;
@@ -67,8 +66,8 @@
 }
 
 .button:hover{
-    color: lightblue;
-    background-color: white;
+    color: #1F305E;
+    background-color: whitesmoke;
     font-weight: bold;
 }
 
