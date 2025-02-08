@@ -16,7 +16,7 @@ function SudokuSolver(){
         async function getSolvedBoard(){
             try{
 
-                const response = await fetch(process.env.API_URL + process.env.API_PORT + '/api/solve', {
+                const response = await fetch(process.env.API_ADDRESS + '/api/solve', {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

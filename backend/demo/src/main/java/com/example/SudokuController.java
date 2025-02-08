@@ -11,15 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class SudokuController {
     private final SudokuSolver solver = new SudokuSolver();
 
-    // Allow cross origin from react
-    @CrossOrigin(origins = "http://localhost:3000")
+    // Allow cross origin requests
+    @CrossOrigin(origins = "*")
 
     @PostMapping("/solve")
     public HashMap<String, String> solveSudoku(@RequestBody String request) {
         String board = request.substring(10, request.length() - 2);
-        System.out.println("Recieved request: " + board);
         String finishedBoard = solver.solvePuzzle(board);
-        System.out.println("Returning: " + finishedBoard);
+        
         return SudokuResponse.getResponse(finishedBoard); 
     }
 }
