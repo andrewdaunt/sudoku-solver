@@ -80,7 +80,6 @@ public class SudokuBox {
                     possibleValues.remove(board[i][j]);
             }
         }
-        System.out.println(possibleValues.size());
     }
 
     public int[] getPossibleValues(){
