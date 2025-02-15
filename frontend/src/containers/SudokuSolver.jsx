@@ -16,14 +16,12 @@ function SudokuSolver(){
         // API call
         const solvedBoard = await getSolvedBoard();
         // If solvedBoard is valid, the board state will be updated
-        /*
         if(solvedBoard !== board && solvedBoard.length === 81){
             setBoard(solvedBoard);
         } else{
             alert('Invalid Board')
             console.log('Invalid Board');
         }
-        */
     };
 
     // Makes api call and returns solved board as a string
