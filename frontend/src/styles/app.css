@@ -1,0 +1,18 @@
+.header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1F305E;
+}
+
+.main{
+    display: block;
+    background-color: rgb(212, 212, 212);
+    padding-top: 30px;
+    padding-bottom: 5px;
+}
+
+.footer{
+    display: block;
+    background-color: #1F305E;
+}

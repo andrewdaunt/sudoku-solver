@@ -1,0 +1,80 @@
+.sudokuBoard{
+    display: block;
+    margin: auto;
+    width: 510px;
+}
+
+.sudokuBoardRow{
+    display: flex;
+}
+
+.sudokuBox:nth-child(3n) {
+    border-right: 2px solid black;
+}
+
+.sudokuBoardRow:nth-child(3n) .sudokuBox {
+    border-bottom: 2px solid black; 
+}
+
+.sudokuBoardRow:nth-child(3n+1) .sudokuBox {
+    border-top: 2px solid black; 
+}
+
+.sudokuBoardRow > .sudokuBox:nth-child(3n+1) {
+    border-left: 2px solid black; 
+}
+
+.sudokuBox{
+    border: 1px solid black;
+    background-color: whitesmoke;
+    width: 50px;
+    height: 50px;
+    text-overflow: ellipsis;
+    text-align: center;
+    font-family: Georgia;
+    font-size: 25px;
+    font-weight: normal;
+}
+
+.sudokuBox:focus{
+    outline-color: #1F305E;
+}
+
+.sudokuBox:invalid{
+    border: 1px solid red;
+}
+
+.buttonsContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    gap: 5px;
+}
+
+.button{
+    width: 140px;
+    height: 60px;
+    color: whitesmoke;
+    background-color: #1F305E;
+    border: 4px solid #1F305E;
+    border-radius: 30px;
+    text-align: center;
+    font-family: Georgia;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.button:hover{
+    color: #1F305E;
+    background-color: whitesmoke;
+    font-weight: bold;
+}
+
+
+.button:disabled{
+    border: 1px solid #cccccc;
+    background-color: #dddddd;
+    color: #cccccc;
+    font-weight: normal;
+}
