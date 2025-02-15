@@ -14,10 +14,10 @@ function SudokuBoard({ board, onBoxChange }) {
     return(
         <div className={styles.sudokuBoard}>
             {Array.from({ length: gridSize }).map((_, rowIndex) => (
-                <div className={styles.sudokuBoardRow}>
+                <div className={styles.sudokuBoardRow} key={rowIndex}>
                     {Array.from({ length: gridSize }).map((_, colIndex) => (
                         <SudokuBox
-                            key={`${rowIndex}x${colIndex}`}
+                            key={getIndex(rowIndex, colIndex)}
                             rowIndex={rowIndex}
                             colIndex={colIndex}
                             className={styles.sudokuBox}

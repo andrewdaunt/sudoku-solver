@@ -16,18 +16,21 @@ function SudokuSolver(){
         // API call
         const solvedBoard = await getSolvedBoard();
         // If solvedBoard is valid, the board state will be updated
+        /*
         if(solvedBoard !== board && solvedBoard.length === 81){
             setBoard(solvedBoard);
         } else{
             alert('Invalid Board')
             console.log('Invalid Board');
         }
+        */
     };
 
     // Makes api call and returns solved board as a string
     async function getSolvedBoard(){
         try{
-            const response = await fetch(process.env.API_ADDRESS + '/api/solve', {
+            const URL = await import.meta.env.VITE_API_ADDRESS;
+            const response = await fetch(URL + '/api/solve', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
