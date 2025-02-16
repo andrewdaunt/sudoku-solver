@@ -1,9 +1,11 @@
-version: "3.8"
-
 services:
   frontend:
     build:
       context: ./frontend 
+    env_file:
+      - ./frontend/.env
+    environment:
+      NODE_ENV: production
     ports:
       - "5173:5173"     
     depends_on:
