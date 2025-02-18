@@ -2,17 +2,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 10vh;
     background-color: #1F305E;
 }
 
-.main{
-    display: block;
+.main-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: rgb(212, 212, 212);
-    padding-top: 30px;
-    padding-bottom: 5px;
+    height: 85vh;
+}
+
+.main{
 }
 
 .footer{
     display: block;
+    height: 10vh;
     background-color: #1F305E;
 }

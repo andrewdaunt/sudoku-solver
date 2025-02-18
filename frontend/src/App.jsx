@@ -11,8 +11,10 @@ function App(){
             <div className='header'>
                 <SudokuHeader />
             </div>
-            <div className='main'>
-                <SudokuSolver />
+            <div className='main-container'>
+                <div className='main'>
+                    <SudokuSolver />
+                </div>
             </div>
             <div className='footer'>
                 <SudokuFooter />
