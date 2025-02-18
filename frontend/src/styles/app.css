@@ -12,13 +12,13 @@
     justify-content: center;
     background-color: rgb(212, 212, 212);
     height: 85vh;
-}
-
-.main{
+    overflow: scroll;
 }
 
 .footer{
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 10vh;
     background-color: #1F305E;
 }
