@@ -189,8 +189,8 @@ public class SudokuSolver{
                 }
 
                 if (isFinishedBoard(copyBoard)) {
-                    System.out.println("Solution Found");
-                    displayFinishedBoard(board);
+                    //System.out.println("Solution Found");
+                    //displayFinishedBoard(board);
                     return getBoardString(copyBoard);
                 }
 
