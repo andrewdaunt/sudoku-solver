@@ -34,15 +34,15 @@ docker compose up --build
 
 ## Examples
 ### Blank Board
-![Blank Board](https://github.com/andrewdaunt/sudoku-solver/blob/main/Board.png?raw=true)
+![Blank Board](https://github.com/andrewdaunt/sudoku-solver/blob/main/examples/Board.png?raw=true)
 
 ### Invalid Board Configuration 
-![Invalid Board Unsolved](https://github.com/andrewdaunt/sudoku-solver/blob/main/Invalid1.png?raw=true)
-![Invalid Board](https://github.com/andrewdaunt/sudoku-solver/blob/main/Invalid2.png?raw=true)
+![Invalid Board Unsolved](https://github.com/andrewdaunt/sudoku-solver/blob/main/examples/Invalid1.png?raw=true)
+![Invalid Board](https://github.com/andrewdaunt/sudoku-solver/blob/main/examples/Invalid2.png?raw=true)
 
 ### Solved Board
-![Valid Board Unsolved](https://github.com/andrewdaunt/sudoku-solver/blob/main/Solve1.png?raw=true)
-![Solved Board](https://github.com/andrewdaunt/sudoku-solver/blob/main/Solve2.png?raw=true)
+![Valid Board Unsolved](https://github.com/andrewdaunt/sudoku-solver/blob/main/examples/Solve1.png?raw=true)
+![Solved Board](https://github.com/andrewdaunt/sudoku-solver/blob/main/examples/Solve2.png?raw=true)
 
 ## Planned Features
 * Add loading animation when waiting for a solution.
